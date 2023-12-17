@@ -1,0 +1,73 @@
+[
+  {
+    "scene_id": "intro",
+    "media_source": "intro.mp4",
+    "media_type": "video",
+    "audio_source": "intro.mp3",
+    "button_config": [{ "text": "Start Game", "target_scene_id": "futuristic_city" }],
+    "text_style": {
+      "text_color": [0, 28, 73, 1],
+      "font_style": "H2"
+    },
+    "audio_repeat_count": 5,
+    "backoff_rate": 3,
+    "has_text": false
+  },
+  {
+    "scene_id": "futuristic_city",
+    "media_source": "futuristic.jpg",
+    "media_type": "image",
+    "audio_source": "futuristic.mp3",
+    "button_config": [
+      { "text": "Explore the city", "target_scene_id": "flying_car" },
+      { "text": "Stay indoors", "target_scene_id": "stay_indoor" }
+    ]
+  },
+  {
+    "scene_id": "flying_car",
+    "media_source": "flying.jpg",
+    "media_type": "image",
+    "audio_source": "flying.mp3",
+    "button_config": [
+      { "text": "Follow the car", "target_scene_id": "rebel_base" },
+      { "text": "Ignore the car", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "stay_indoor",
+    "media_source": "door_knock.jpg",
+    "media_type": "image",
+    "audio_source": "indoor.mp3",
+    "button_config": [
+      { "text": "Answer the door", "target_scene_id": "robot_encounter" },
+      { "text": "Ignore the knock", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "robot_encounter",
+    "media_source": "robot.jpg",
+    "media_type": "image",
+    "audio_source": "robot_warning.mp3",
+    "button_config": [
+      { "text": "Take action", "target_scene_id": "end" },
+      { "text": "Ignore the warning", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "rebel_base",
+    "media_source": "rebel_base.jpg",
+    "media_type": "image",
+    "audio_source": "rebel_base.mp3",
+    "button_config": [
+      { "text": "Join the rebels", "target_scene_id": "end" },
+      { "text": "Decline the offer", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "end",
+    "media_source": "end.jpg",
+    "media_type": "image",
+    "audio_source": "outro.mp3",
+    "has_text": false
+  }
+]
