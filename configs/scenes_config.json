@@ -40,7 +40,7 @@
     "audio_source": "indoor.mp3",
     "button_config": [
       { "text": "Answer the door", "target_scene_id": "robot_encounter" },
-      { "text": "Ignore the knock", "target_scene_id": "end" }
+      { "text": "Ignore the knock", "target_scene_id": "television_show" }
     ]
   },
   {
@@ -51,6 +51,16 @@
     "button_config": [
       { "text": "Take action", "target_scene_id": "end" },
       { "text": "Ignore the warning", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "television_show",
+    "media_source": "television_genre.jpg",
+    "media_type": "image",
+    "audio_source": "television_genre.mp3",
+    "button_config": [
+      { "text": "History documentary", "target_scene_id": "end" },
+      { "text": "Sci-fi thriller", "target_scene_id": "end" }
     ]
   },
   {
