@@ -30,7 +30,7 @@
     "audio_source": "flying.mp3",
     "button_config": [
       { "text": "Follow the car", "target_scene_id": "rebel_base" },
-      { "text": "Ignore the car", "target_scene_id": "end" }
+      { "text": "Ignore the car", "target_scene_id": "high_tech_market" }
     ]
   },
   {
@@ -71,6 +71,16 @@
     "button_config": [
       { "text": "Join the rebels", "target_scene_id": "end" },
       { "text": "Decline the offer", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "high_tech_market",
+    "media_source": "high_tech_market.jpg",
+    "media_type": "image",
+    "audio_source": "high_tech_market.mp3",
+    "button_config": [
+      { "text": "Advanced weaponry", "target_scene_id": "end" },
+      { "text": "Virtual reality headset", "target_scene_id": "end" }
     ]
   },
   {
