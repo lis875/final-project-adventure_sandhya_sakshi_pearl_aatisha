@@ -12,9 +12,9 @@ def read_file(file_path):
         with open(file_path, 'r') as file:
             content = file.read()
         return content
-    except FileNotFoundError:
+    except FileNotFoundError: # Handle the exception
         print(f"Error: File not found at path {file_path}")
         return None
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
+    except Exception as e: # Handle the exception
+        print(f"Error: {e}") # Print an error message with the details of the exception
+        return None # Return None to indicate an error
