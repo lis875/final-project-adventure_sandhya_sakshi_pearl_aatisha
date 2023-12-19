@@ -8,15 +8,16 @@ from kivymd.uix.label import MDLabel
 from kivymd.app import MDApp
 from kivy.clock import Clock
 
+# Importing constants and helper functions
 from configs.constants import DEFAULTS
 from utils.helper import read_file
 
-# Widgets Import
+# Importing custom widgets
 from widgets.button_bar import ButtonBar
 from widgets.close_button import CloseButton
 from widgets.subtitle_label import SubtitleLabel
 
-
+# Define a custom scene widget that inherits from RelativeLayout
 class Scene(RelativeLayout):
     """Custom scene widget. Creates a scene for the game.
 
@@ -51,11 +52,13 @@ class Scene(RelativeLayout):
         self.bind(pos=self.redraw)
         self.bind(size=self.redraw)
 
+    # Method to redraw the scene by setting the window clear color
     def redraw(self, *args) -> None:
         """Redraw the scene."""
         with self.canvas.before:
             Window.clearcolor = self.bg_color
 
+    # Method to build the scene
     def build(self) -> None:
         """Build the scene."""
         self.build_media_player()
@@ -67,24 +70,26 @@ class Scene(RelativeLayout):
 
         return self
 
+    # Method to build the media player widget based on media type
     def build_media_player(self) -> None:
         """Build the media player."""
         media_path = f'assets/{self.scene_id}/{self.media_source}'
-        if self.media_type == 'video':
+        if self.media_type == 'video': # Creating a Video widget
             self.media_player = Video(
                 source=media_path, state='play', options={'eos': 'loop', 'hide_controls': True}
             )
-        elif self.media_type == 'image':
+        elif self.media_type == 'image': # Creating an Image widget 
             self.media_player = Image(source=media_path)
 
-        self.add_widget(self.media_player)
+        self.add_widget(self.media_player) # Adding the media player widget to the scene
 
+    # Method to build the subtitle label
     def build_subtitle(self) -> None:
         """Build the label."""
         if self.has_text:
-            subtitle_path = f'assets/{self.scene_id}/subtitle.txt'
+            subtitle_path = f'assets/{self.scene_id}/subtitle.txt' # Read subtitle text from a file
             subtitle = read_file(subtitle_path)
-            label = SubtitleLabel(
+            label = SubtitleLabel(  # Creating a SubtitleLabel widget with specified properties and add it to the scene
                 subtitle=subtitle,
                 pos_hint={'center_x': 0.5, 'center_y': 0.25},  # Adjust y value to position the label
                 size_hint=(0.9, None),  # Set width to 70%, height to 10%
@@ -94,29 +99,34 @@ class Scene(RelativeLayout):
             )
             self.add_widget(label)
 
+    # Method to build the button bar
     def build_button_bar(self) -> None:
         """Build the button bar."""
-        if self.button_config:
+        if self.button_config: # Creating a ButtonBar widget with specified configuration and add it to the scene
             button_bar = ButtonBar(self.button_config, app=self.app)
             self.add_widget(button_bar)
 
+    # Method to build the audio player
     def build_audio_player(self, _) -> None:
         """Build the audio player."""
         audio_path = f'assets/{self.scene_id}/{self.audio_source}'
-        if self.audio_source:
+        if self.audio_source: # Loading the audio file and configure the audio player
             self.audio = SoundLoader.load(audio_path)
             if self.audio:
                 self.audio.loop = False
                 self.audio.bind(on_stop=self.on_audio_stop)
                 self.audio.play()
 
+    # Method to build the close button
     def build_close_button(self) -> None:
         """Build the close button."""
-        close_button = CloseButton(self.app)
+        close_button = CloseButton(self.app) # Creating a CloseButton widget and add it to the scene
         self.add_widget(close_button)
 
+    # Method to build the timer label
     def build_timer_label(self) -> None:
         """Build the timer label."""
+        # Creating an MDLabel widget for displaying the timer and add it to the scene
         self.timer_label = MDLabel(
             text="",
             pos_hint={'top': 1},
@@ -130,6 +140,7 @@ class Scene(RelativeLayout):
         )
         self.add_widget(self.timer_label)
 
+    # Method to handle exit events
     def on_exit(self) -> None:
         """Handle exit events."""
         self.scene_ended = True
@@ -139,6 +150,7 @@ class Scene(RelativeLayout):
 
         self.unschedule_events()
 
+    # Method to unschedule various events
     def unschedule_events(self) -> None:
         """Unschedule events."""
         if hasattr(self, 'audio_repeat_scheduler'):
@@ -151,6 +163,7 @@ class Scene(RelativeLayout):
             Clock.unschedule(self.audio_player_scheduler)
 
 
+    # Method to handle audio stop events
     def on_audio_stop(self, _) -> None:
         """Handle audio stop events."""
         if not self.scene_ended:
@@ -159,25 +172,28 @@ class Scene(RelativeLayout):
 
             if self.audio_play_count < self.audio_repeat_count:
                 self.audio.seek(0)
-                self.audio_repeat_scheduler = Clock.schedule_once(
+                self.audio_repeat_scheduler = Clock.schedule_once(   # Scheduling playing audio again after a specified backoff rate
                     self.play_audio_after_buffer, self.backoff_rate
                 )
             else:
                 self.audio.unbind(on_stop=self.on_audio_stop)
                 self.audio.stop()
-                self.fallback_event_scheduler = Clock.schedule_once(self.go_to_fallback, self.backoff_rate)
+                self.fallback_event_scheduler = Clock.schedule_once(self.go_to_fallback, self.backoff_rate) # Scheduling going to fallback scene after a specified backoff rate
 
+    # Method to play audio after a buffer time
     def play_audio_after_buffer(self, _) -> None:
         """Play audio after buffer time."""
         if self.audio:
             self.audio.play()
             self.audio.seek(0)
 
+    # Method to go to fallback scene
     def go_to_fallback(self, _) -> None:
         """Go to fallback scene."""
         self.timer_label.text = f"Idle. Game terminating in {self.timer_duration} seconds"
         self.timer_event_interval = Clock.schedule_interval(self.update_timer, 1)
 
+    # Method to update the timer label
     def update_timer(self, _) -> None:
         """Update the timer."""
         self.timer_duration -= 1
