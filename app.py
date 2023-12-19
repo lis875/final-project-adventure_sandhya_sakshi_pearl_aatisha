@@ -24,7 +24,7 @@ class App(MDApp):
         Returns:
             ScreenManager: returns the ScreenManager instance
         """
-        self.title = GAME_TITLE
+        self.title = GAME_TITLE # Setting the application title
         self.sm = ScreenManager()
         self.scenes = self.load_scenes_from_config()
         self.current_scene_id = INTRO_SCENE_ID
@@ -39,16 +39,19 @@ class App(MDApp):
         Args:
             scene_id (str): scene id to switch the scene to
         """
+        # If there's a current scene, exit it and remove it from the ScreenManager
         if self.current_scene:
             self.current_scene.on_exit()
             self.sm.remove_widget(self.sm.get_screen(self.current_scene_id))
 
+        # Finding the data for the specified scene id
         scene_data = next(
             (scene_data for scene_data in self.scenes if scene_data.scene_id == scene_id), None
         )
         if not scene_data:
             return
 
+        # Creating a new Scene instance with the scene data
         self.current_scene = Scene(
             self,
             scene_id=scene_id,
@@ -64,9 +67,10 @@ class App(MDApp):
         )
         self.current_scene_id = scene_id
 
+        # Creating a new Screen and add the current scene's widget to it
         screen = Screen(name=scene_id)
         screen.add_widget(self.current_scene.build())
-        self.sm.add_widget(screen)
+        self.sm.add_widget(screen) # Adding the new Screen to the ScreenManager
 
     def load_scenes_from_config(self) -> List[Scene]:
         """Load scenes from configuration json which has the list of scenes.
@@ -75,7 +79,7 @@ class App(MDApp):
             List[Scene]: returns the list of scene objects
         """
         try:
-            with open('./configs/scenes_config.json', 'r') as file:
+            with open('./configs/scenes_config.json', 'r') as file: # Loading scenes data from the scenes_config.json file
                 scenes_data = json.load(file)
             scenes = [self.create_scene_from_data(scene_data) for scene_data in scenes_data]
             return scenes
