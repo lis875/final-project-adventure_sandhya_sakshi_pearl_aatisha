@@ -61,6 +61,7 @@ class App(MDApp):
             audio_repeat_count=scene_data.audio_repeat_count,
             backoff_rate=scene_data.backoff_rate,
             has_text=scene_data.has_text,
+            last_scene_id=scene_data.last_scene_id, 
         )
         self.current_scene_id = scene_id
 
@@ -104,6 +105,7 @@ class App(MDApp):
             audio_repeat_count=scene_data.get('audio_repeat_count', DEFAULTS['AUDIO_REPEAT']),
             backoff_rate=scene_data.get('backoff_rate', DEFAULTS['BACKOFF_RATE']),
             has_text=scene_data.get('has_text', True),
+            last_scene_id=scene_data.get('last_scene_id', None),
         )
 
 

@@ -69,8 +69,8 @@
     "media_type": "image",
     "audio_source": "rebel_base.mp3",
     "button_config": [
-      { "text": "Join the rebels", "target_scene_id": "end" },
-      { "text": "Decline the offer", "target_scene_id": "end" }
+      { "text": "Join the rebels", "target_scene_id": "mission_role" },
+      { "text": "Decline the offer", "target_scene_id": "high_tech_market" }
     ]
   },
   {
@@ -82,6 +82,24 @@
       { "text": "Advanced weaponry", "target_scene_id": "end" },
       { "text": "Virtual reality headset", "target_scene_id": "end" }
     ]
+  },
+  {
+    "scene_id": "mission_role",
+    "media_source": "mission_role.jpg",
+    "media_type": "image",
+    "audio_source": "mission_role.mp3",
+    "button_config": [
+      { "text": "Frontline Fighter", "target_scene_id": "frontline_fighter" },
+      { "text": "Negotiator", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "frontline_fighter",
+    "media_source": "victory.jpg",
+    "media_type": "image",
+    "audio_source": "victory.mp3",
+    "last_scene_id": "end",
+    "audio_repeat_count": 1
   },
   {
     "scene_id": "end",
