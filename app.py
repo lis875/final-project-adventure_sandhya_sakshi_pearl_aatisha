@@ -51,21 +51,23 @@ class App(MDApp):
         if not scene_data:
             return
 
-        # Creating a new Scene instance with the scene data
+        # Create a Scene object with the specified parameters.
         self.current_scene = Scene(
-            self,
-            scene_id=scene_id,
-            media_source=scene_data.media_source,
-            media_type=scene_data.media_type,
-            audio_source=scene_data.audio_source,
-            button_config=scene_data.button_config,
-            text_style=scene_data.text_style,
-            bg_color=scene_data.bg_color,
-            audio_repeat_count=scene_data.audio_repeat_count,
-            backoff_rate=scene_data.backoff_rate,
-            has_text=scene_data.has_text,
-            last_scene_id=scene_data.last_scene_id, 
-        )
+            self,  # Reference to the main application.
+            scene_id=scene_id,  # Unique identifier for the scene.
+            media_source=scene_data.media_source,  # Source of media (e.g., image, video).
+            media_type=scene_data.media_type,  # Type of media (e.g., 'image', 'video').
+            audio_source=scene_data.audio_source,  # Source of audio associated with the scene.
+            button_config=scene_data.button_config,  # Configuration for interactive buttons.
+            text_style=scene_data.text_style,  # Style settings for text.
+            bg_color=scene_data.bg_color,  # Background color in RGBA format.
+            audio_repeat_count=scene_data.audio_repeat_count,  # Number of times to repeat audio.
+            backoff_rate=scene_data.backoff_rate,  # Rate for backoff mechanism.
+            has_text=scene_data.has_text,  # Flag indicating whether the scene has text.
+            last_scene_id=scene_data.last_scene_id,  # Identifier of the previous scene.
+            # Additional parameters can be added based on the Scene constructor.
+)
+
         self.current_scene_id = scene_id
 
         # Creating a new Screen and add the current scene's widget to it
