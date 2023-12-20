@@ -28,7 +28,7 @@ class Scene(RelativeLayout):
     def __init__(self, app: MDApp, scene_id: str, media_source: str, media_type: str, audio_source: Optional[str],
                     button_config: Optional[List[Dict[str, Union[str, int]]]], text_style: Optional[Dict[str, Union[str, Tuple[float, float, float, float]]]],
                     bg_color: Tuple[float, float, float, float] = DEFAULTS['BG_COLOR'], audio_repeat_count: int = DEFAULTS['AUDIO_REPEAT'],
-                    backoff_rate: int = DEFAULTS['BACKOFF_RATE'], has_text: bool = True, **kwargs):
+                    backoff_rate: int = DEFAULTS['BACKOFF_RATE'], has_text: bool = True, last_scene_id: str = None, **kwargs):
         super(Scene, self).__init__(**kwargs)
         self.app = app
         self.scene_id = scene_id
@@ -48,6 +48,7 @@ class Scene(RelativeLayout):
         self.scene_ended = False
         self.has_text = has_text
         self.backoff_rate = backoff_rate
+        self.last_scene_id = last_scene_id
         self.timer_duration = DEFAULTS['TIMER']
         self.bind(pos=self.redraw)
         self.bind(size=self.redraw)
@@ -178,7 +179,10 @@ class Scene(RelativeLayout):
             else:
                 self.audio.unbind(on_stop=self.on_audio_stop)
                 self.audio.stop()
-                self.fallback_event_scheduler = Clock.schedule_once(self.go_to_fallback, self.backoff_rate) # Scheduling going to fallback scene after a specified backoff rate
+                if self.last_scene_id:
+                    self.app.switch_to_scene(self.last_scene_id)
+                else:
+                    self.fallback_event_scheduler = Clock.schedule_once(self.go_to_fallback, self.backoff_rate)
 
     # Method to play audio after a buffer time
     def play_audio_after_buffer(self, _) -> None:

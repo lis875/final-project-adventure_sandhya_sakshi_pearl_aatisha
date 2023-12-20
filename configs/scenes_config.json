@@ -30,7 +30,7 @@
     "audio_source": "flying.mp3",
     "button_config": [
       { "text": "Follow the car", "target_scene_id": "rebel_base" },
-      { "text": "Ignore the car", "target_scene_id": "end" }
+      { "text": "Ignore the car", "target_scene_id": "high_tech_market" }
     ]
   },
   {
@@ -40,7 +40,7 @@
     "audio_source": "indoor.mp3",
     "button_config": [
       { "text": "Answer the door", "target_scene_id": "robot_encounter" },
-      { "text": "Ignore the knock", "target_scene_id": "end" }
+      { "text": "Ignore the knock", "target_scene_id": "television_show" }
     ]
   },
   {
@@ -49,8 +49,18 @@
     "media_type": "image",
     "audio_source": "robot_warning.mp3",
     "button_config": [
-      { "text": "Take action", "target_scene_id": "end" },
-      { "text": "Ignore the warning", "target_scene_id": "end" }
+      { "text": "Take action", "target_scene_id": "market" },
+      { "text": "Ignore the warning", "target_scene_id": "parallel_end" }
+    ]
+  },
+  {
+    "scene_id": "television_show",
+    "media_source": "television_genre.jpg",
+    "media_type": "image",
+    "audio_source": "television_genre.mp3",
+    "button_config": [
+      { "text": "History documentary", "target_scene_id": "parallel_end" },
+      { "text": "Sci-fi thriller", "target_scene_id": "parallel_end" }
     ]
   },
   {
@@ -59,9 +69,73 @@
     "media_type": "image",
     "audio_source": "rebel_base.mp3",
     "button_config": [
-      { "text": "Join the rebels", "target_scene_id": "end" },
-      { "text": "Decline the offer", "target_scene_id": "end" }
+      { "text": "Join the rebels", "target_scene_id": "mission_role" },
+      { "text": "Decline the offer", "target_scene_id": "high_tech_market" }
     ]
+  },
+  {
+    "scene_id": "high_tech_market",
+    "media_source": "high_tech_market.jpg",
+    "media_type": "image",
+    "audio_source": "high_tech_market.mp3",
+    "button_config": [
+      { "text": "Advanced weaponry", "target_scene_id": "laser_gun" },
+      { "text": "Virtual reality headset", "target_scene_id": "parallel_end" }
+    ]
+  },
+  {
+    "scene_id": "market",
+    "media_source": "market.jpg",
+    "media_type": "image",
+    "audio_source": "market.mp3",
+    "button_config": [
+      { "text": "Advanced weaponry", "target_scene_id": "laser_gun" },
+      { "text": "Virtual reality headset", "target_scene_id": "parallel_end" }
+    ]
+  },
+  {
+    "scene_id": "mission_role",
+    "media_source": "mission_role.jpg",
+    "media_type": "image",
+    "audio_source": "mission_role.mp3",
+    "button_config": [
+      { "text": "Frontline Fighter", "target_scene_id": "frontline_fighter" },
+      { "text": "Negotiator", "target_scene_id": "end" }
+    ]
+  },
+  {
+    "scene_id": "laser_gun",
+    "media_source": "laser_gun.jpg",
+    "media_type": "image",
+    "audio_source": "laser_gun.mp3",
+    "button_config": [
+      { "text": "Consider joining the rebels", "target_scene_id": "mission_role" },
+      { "text": "Go back home", "target_scene_id": "stay_indoor" }
+    ]
+  },
+  {
+    "scene_id": "frontline_fighter",
+    "media_source": "victory.jpg",
+    "media_type": "image",
+    "audio_source": "victory.mp3",
+    "last_scene_id": "end",
+    "audio_repeat_count": 1
+  },
+  {
+    "scene_id": "virtual_world",
+    "media_source": "virtual_world.jpg",
+    "media_type":"image",
+    "audio_source": "virtual_world.jpg",
+    "last_scene_id": "end",
+    "audio_repeat_count": 1
+  },
+  {
+    "scene_id": "parallel_end",
+    "media_source": "parallel_end.jpg",
+    "media_type":"image",
+    "audio_source": "parallel.jpg",
+    "last_scene_id": "end",
+    "audio_repeat_count": 1
   },
   {
     "scene_id": "end",
