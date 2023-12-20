@@ -1,7 +1,7 @@
 from typing import List, Dict, Union
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.app import MDApp
+
 import json
 from configs.constants import GAME_TITLE, INTRO_SCENE_ID, DEFAULTS
 

@@ -29,7 +29,10 @@ class Scene(RelativeLayout):
                     button_config: Optional[List[Dict[str, Union[str, int]]]], text_style: Optional[Dict[str, Union[str, Tuple[float, float, float, float]]]],
                     bg_color: Tuple[float, float, float, float] = DEFAULTS['BG_COLOR'], audio_repeat_count: int = DEFAULTS['AUDIO_REPEAT'],
                     backoff_rate: int = DEFAULTS['BACKOFF_RATE'], has_text: bool = True, last_scene_id: str = None, **kwargs):
+         # Initialize the Scene object with the provided parameters and default values.
         super(Scene, self).__init__(**kwargs)
+    
+        # Store references to the application, scene ID, background color, media source, media type, audio source, etc.
         self.app = app
         self.scene_id = scene_id
         self.bg_color = bg_color
@@ -37,10 +40,14 @@ class Scene(RelativeLayout):
         self.media_type = media_type
         self.audio_source = audio_source
         self.button_config = button_config
+        
+        # Set text style to the provided value or use the default text style.
         if text_style:
             self.text_style = text_style
         else:
             self.text_style = DEFAULTS['DEFAULT_TEXT_STYLE']
+        
+        # Initialize variables related to media playback, audio, scene state, etc.
         self.media_player = None
         self.audio = None
         self.audio_repeat_count = audio_repeat_count
@@ -49,9 +56,12 @@ class Scene(RelativeLayout):
         self.has_text = has_text
         self.backoff_rate = backoff_rate
         self.last_scene_id = last_scene_id
+        
+        # Set the default timer duration and bind the redraw method to position and size changes.
         self.timer_duration = DEFAULTS['TIMER']
         self.bind(pos=self.redraw)
         self.bind(size=self.redraw)
+
 
     # Method to redraw the scene by setting the window clear color
     def redraw(self, *args) -> None:
@@ -199,9 +209,13 @@ class Scene(RelativeLayout):
 
     # Method to update the timer label
     def update_timer(self, _) -> None:
-        """Update the timer."""
-        self.timer_duration -= 1
-        self.timer_label.text = f"Idle. Game terminating in {self.timer_duration} seconds"
+        """
+        Update the timer.
+        Parameters:
+        - _: Placeholder parameter (commonly used for event callbacks).
 
-        if self.timer_duration <= 0:
-            self.app.stop()
+        """
+        self.timer_duration -= 1 # Decrease the remaining time in the timer by 1 second.
+        self.timer_label.text = f"Idle. Game terminating in {self.timer_duration} seconds" # Update the text of the timer_label to reflect the new remaining time.
+        if self.timer_duration <= 0: # Check if the timer has reached or fallen below zero.
+            self.app.stop() # If the timer has elapsed, stop the application.
