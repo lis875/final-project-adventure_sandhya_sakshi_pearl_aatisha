@@ -100,18 +100,20 @@ class App(MDApp):
             Scene: Scene class instance
         """
         return Scene(
-            self,
-            scene_id=scene_data['scene_id'],
-            media_source=scene_data['media_source'],
-            media_type=scene_data['media_type'],
-            audio_source=scene_data['audio_source'],
-            button_config=scene_data.get('button_config', None),
-            text_style=scene_data.get('text_style', None),
-            bg_color=scene_data.get('bg_color', DEFAULTS['BG_COLOR']),
-            audio_repeat_count=scene_data.get('audio_repeat_count', DEFAULTS['AUDIO_REPEAT']),
-            backoff_rate=scene_data.get('backoff_rate', DEFAULTS['BACKOFF_RATE']),
-            has_text=scene_data.get('has_text', True),
-            last_scene_id=scene_data.get('last_scene_id', None),
+            self,  # Reference to the main application.
+            scene_id=scene_data['scene_id'],  # Unique identifier for the scene.
+            media_source=scene_data['media_source'],  # Source of media (e.g., image, video).
+            media_type=scene_data['media_type'],  # Type of media (e.g., 'image', 'video').
+            audio_source=scene_data['audio_source'],  # Source of audio associated with the scene.
+            
+            # Optional parameters with default values or None if not provided in scene_data.
+            button_config=scene_data.get('button_config', None),  # Configuration for interactive buttons.
+            text_style=scene_data.get('text_style', None),  # Style settings for text.
+            bg_color=scene_data.get('bg_color', DEFAULTS['BG_COLOR']),  # Background color in RGBA format.
+            audio_repeat_count=scene_data.get('audio_repeat_count', DEFAULTS['AUDIO_REPEAT']),  # Number of times to repeat audio.
+            backoff_rate=scene_data.get('backoff_rate', DEFAULTS['BACKOFF_RATE']),  # Rate for backoff mechanism.
+            has_text=scene_data.get('has_text', True),  # Flag indicating whether the scene has text.
+            last_scene_id=scene_data.get('last_scene_id', None),  # Identifier of the previous scene.
         )
 
 
