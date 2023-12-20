@@ -18,11 +18,14 @@ class SubtitleLabel(MDLabel):
 
         self.bind(pos=self.update_bg_rect_pos, size=self.update_bg_rect_size)
 
+    # function to calculate and return the updated size of the Rectangle
     def get_updated_rect_size(self):
         return self.width + self.padding[0], self.height + self.padding[1]
 
+    # function to update the position of the background Rectangle when the position of the label changes
     def update_bg_rect_pos(self, _, value):
         self.bg_rect.pos = value
 
+    # function to update the size of the background Rectangle when the size of the label changes
     def update_bg_rect_size(self, _, value):
         self.bg_rect.size = self.get_updated_rect_size()
